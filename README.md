@@ -15,7 +15,7 @@ sudo chown $(whoami):$(whoami) /var/run/docker.sock
 docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:13
 
 # Create container
-docker run -v ~/docker/container/addons:/mnt/extra-addons -p 80{odoo_version}:8069 -p 81{odoo_version}:81{odoo_version} --name odoo_{odoo_version} --link db:db -t odoo:{odoo_version}.0
+docker run -v ~/docker/container/addons:/mnt/extra-addons -p 8014:8069 -p 8114:8114 --name odoo_14 --link db:db -t odoo:14.0
 
 # Install modules
-docker exec -ti odoo_{odoo_version} bash -c "/usr/bin/odoo -i module -p 81{odoo_version}  -d odoo_{odoo_version} --db_host db --db_port 5432 --db_user odoo --db_password odoo --without-demo all"
+docker exec -ti odoo_14 bash -c "/usr/bin/odoo -i module -p 8114  -d odoo_14 --db_host db --db_port 5432 --db_user odoo --db_password odoo --without-demo all"
