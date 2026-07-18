@@ -4,3 +4,6 @@
 [submodule "addons/instance_solesgps"]
 	path = addons/instance_solesgps
 	url = git@github.com:evigra/instance_solesgps.git
+[submodule "addons/gpsmap_engine"]
+	path = addons/gpsmap_engine
+	url = git@github.com:evigra/gpsmap_engine.git
