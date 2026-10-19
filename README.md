@@ -1,8 +1,8 @@
 # CONFIGURACION
-CONTAINNER  container_PROYECTO
-NUEVO       container_NUEVOPROYECTO
-DOMAIN      PROYECTO.com
-instance    instance_PROYECTO
+CONTAINNER  container_solesgps
+NUEVO       container_solesgps
+DOMAIN      solesgps.com
+instance    instance_solesgps
 DB          container_postgres_16
 
 This repository contains the template to generate the containers
@@ -31,16 +31,16 @@ sudo apt install python3-certbot-nginx
 
 
 # GITHUB CONFIGURATION 
-git clone git@github.com:evigra/container_PROYECTO.git container_NUEVOPROYECTO
-git remote set-url origin git@github.com:evigra/container_NUEVOPROYECTO.git
+git clone git@github.com:evigra/container_solesgps.git container_solesgps
+git remote set-url origin git@github.com:evigra/container_solesgps.git
 
 git push --set-upstream origin 16.0
 
 eval "$(ssh-agent -s)"; ssh-add ~/.ssh/e.vizcaino@solesgps.com
 
-git clone --recurse-submodules git@github.com:evigra/container_NUEVOPROYECTO.git
+git clone --recurse-submodules git@github.com:evigra/container_solesgps.git
 
-git submodule add git@github.com:evigra/instance_PROYECTO.git addons/instance_PROYECTO
+git submodule add git@github.com:evigra/instance_solesgps.git addons/instance_solesgps
 
 
 # DOCKER CONTAINER CONFIGURATIONS
@@ -54,13 +54,13 @@ docker-compose restart
 docker exec -it container_postgres_16 psql -U odoo -d postgres
 
 # Install modules
-docker exec -it container_PROYECTO bash -c "odoo -d container_PROYECTO -i instance_PROYECTO -p 8006 --db_host=container_postgres_16 --db_port=5432 --db_user=odoo --db_password=odoo  --without-demo=all"
+docker exec -it container_solesgps bash -c "odoo -d container_solesgps -i instance_solesgps -p 8006 --db_host=container_postgres_16 --db_port=5432 --db_user=odoo --db_password=odoo  --without-demo=all"
 
 
 
 # show container in console
 
-docker exec -it container_PROYECTO /bin/bash
+docker exec -it container_solesgps /bin/bash
 
 
 # NGIX
@@ -69,14 +69,14 @@ sudo nano /etc/nginx/sites-enabled/default
 sudo nginx -t
 sudo systemctl restart nginx
 
-sudo certbot --nginx -d PROYECTO.com -d www,PROYECTO.com
+sudo certbot --nginx -d solesgps.com -d www,solesgps.com
 sudo certbot certificates
 sudo systemctl status certbot.timer
 sudo certbot renew --dry-run    
 
 server {
     listen 80;
-    server_name PROYECTO.com www.PROYECTO.com;
+    server_name solesgps.com www.solesgps.com;
     client_max_body_size 10M;
 
     proxy_read_timeout 720s;
