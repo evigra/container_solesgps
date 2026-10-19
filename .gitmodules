@@ -7,3 +7,6 @@
 [submodule "addons/gpsmap_engine"]
 	path = addons/gpsmap_engine
 	url = git@github.com:evigra/gpsmap_engine.git
+[submodule "addons/gpsmap_geofence"]
+	path = addons/gpsmap_geofence
+	url = git@github.com:evigra/gpsmap_geofence.git
